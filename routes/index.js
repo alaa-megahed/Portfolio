@@ -86,7 +86,7 @@ router.get('/profile', isLoggedIn, function(req, res) {
               }
               else
               {
-                res.render('profile',{user:req.user, message:req.flash('portfolioMessage'),portfolio:result, works:works});              }
+                res.render('profile',{user:req.user, message:req.flash('successMessage'),portfolio:result, works:works});              }
             })
             
           }
@@ -102,14 +102,14 @@ router.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/profile',
   failureRedirect: '/signup',
   failureFlash: true,
-  
+  successFlash:true
 }));
 
 router.post('/login', passport.authenticate('local-login', {
   successRedirect: '/profile',
   failureRedirect: '/login',
   failureFlash: true,
-  
+  successFlash:true
 }));
 
 
@@ -147,11 +147,13 @@ router.post('/add-work', upload.single('screenshot'), function (req, res, next) 
           }
           else if(!result)
           {
+            req.flash('successMessage',"Congrats!\nYou have successfully added your work!")
            res.redirect('/profile');
           }
           else
           {
             result.works.push(work);
+            req.flash('successMessage',"Congrats!\nYou have successfully added your work!")
             res.redirect('/profile');
           }
         });
@@ -199,7 +201,7 @@ router.post('/create-portfolio',function(req,res){
          
         }
       })
-      req.flash('portfolioMessage',"Congrats!\nYou have successfully created your portfolio!")
+      req.flash('successMessage',"Congrats!You have successfully created your portfolio!")
       res.redirect('/profile');
     }
   })

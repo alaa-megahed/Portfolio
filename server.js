@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 
-var port = process.env.PORT || 8088;
+var port = process.env.PORT || 8080;
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -43,11 +43,6 @@ require('./config/passport')(passport);
 app.use('/', routes);
 app.use('/users', users);
 
-app.use(function(req, res, next){
-    res.locals.success_messages = req.flash('success_messages');
-    res.locals.error_messages = req.flash('error_messages');
-    next();
-});
 
 
 
