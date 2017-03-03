@@ -1,0 +1,63 @@
+<% include layouts/head %>
+
+  <body>
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="jumbotron text-center">
+        <h1>Portfolio</h1>
+        <p class="lead">First serious trial for mini project portfolio website</p>
+      
+      </div>
+      </div>
+      <% if(message !== null) { %>
+      <div class= "col-sm-8 col-sm-offset-2 text-center"><h2> <%= message %><hr></h2></div>
+      
+      
+      <% } else { %>
+      <div class="text-center">
+      <div calss="container-fluid">
+    <div class="row">
+        <!-- <div class="col-md-8"> -->
+            <div class="row">
+                <% for(var i=0; i< portfolios.length; i++){%>
+                    <div class="card col-sm-3">
+                      <h4> <a href="/view-portfolio?id=<%= portfolios[i]._id %>" class="card-title"> <%= portfolios[i].name %></a></h4>
+                      <h6> <%= portfolios[i].description %></h6>
+                       <img src='<%= portfolios[i].profilePicture%>' class="img-circle" width = "110" height="100">
+                    </div>
+                <% } %>
+            </div>
+        <!-- </div> -->
+      </div>
+      </div> 
+
+       <% if (pageCount > 1) { %>
+          <ul class="pagination">
+              <% if (currentPage > 1) { %>
+                  <li><a href="/?page=1">&laquo;</a></li>
+              <% } %>
+              <% var i = 1;
+              if (currentPage > 5) {
+                  i = +currentPage - 4;
+              } %>
+              <% if (i !== 1) { %>
+                  <li class="disabled"><a href="#">...</a></li>
+              <% } %>
+              <% for (i; i<=pageCount; i++) { %>
+                  <% if (currentPage == i) { %>
+                      <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+                  <% } else { %>
+                      <li><a href="/?page=<%= i %>"><%= i %></a></li>
+                  <% } %>
+                  <% if (i == (+currentPage + 4)) { %>
+                      <li class="disabled"><a href="#">...</a></li>
+                  <% break; } %>
+              <% } %>
+              <% if (currentPage != pageCount) { %>
+                  <li><a href="/?page=<%= pageCount %>">&raquo;</a></li>
+              <% } %>
+          </ul>
+      <% } %>
+       </div>
+       <% } %>
+  </body>
+</html>

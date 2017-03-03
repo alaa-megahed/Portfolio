@@ -1,0 +1,27 @@
+<% include layouts/head %>
+<body>
+<div class="jumbotron">
+  <div class="text-center">
+        <img src="<%= portfolio.profilePicture %>"class="img-circle" width = "170" height="170" id="ppbutton">
+        <h1> <%= portfolio.name %></h1><br>
+      </div>
+      </div>
+    <div class="row">
+        <!-- <div class="col-xs-12 col-md-8"> -->
+            <div class="row">
+                <% for(var i=0; i< works.length; i++){%>
+                    <div class="card col-xs-4">
+                        <h4 class="card-title"> <%= works[i].title %></h4>
+                        <% if(works[i].type == "1") { %>
+                        <a href="<%= works[i].details %>" class="btn btn-primary card-link">Visit Website</a>
+                        <% }else { %>
+
+                        <img src='<%= works[i].details%>' class="img-circle" width = "120" height="100">
+                        <% } %>
+                    </div>
+                <% } %>
+            </div>
+        <!-- </div> -->
+        </div>
+  </body>
+</html>
